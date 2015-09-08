@@ -5,15 +5,6 @@ import (
 	"encoding/json"
 )
 
-type innerData struct { 
-	Temp float64 `json:"temp"` 
-}
-
-type weatherData struct {
-	City string    `json:"name"`
-	Main innerData `json:"main"`
-}
-
 func Query(city string) (weatherData, error) {
 	baseURL := "http://api.openweathermap.org/data/2.5/weather" 
 	resp, err := http.Get(baseURL + "?q=" + city)
@@ -30,6 +21,15 @@ func Query(city string) (weatherData, error) {
 	data.Main.Temp = kelvinToFahr(data.Main.Temp)
 
 	return data, nil
+}
+
+type weatherData struct {
+	City string    `json:"name"`
+	Main innerData `json:"main"`
+}
+
+type innerData struct { 
+	Temp float64 `json:"temp"` 
 }
 
 func kelvinToFahr(k float64) float64 {
