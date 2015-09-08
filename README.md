@@ -6,7 +6,7 @@ See [`json-samples`](json-samples) for samples of the JSON-encoded data
 returned by the [OpenWeatherMap](http://openweathermap.org/api) and 
 [Weather Underground](http://www.wunderground.com/weather/api) APIs.
 
-Note that the Weather Underground API requires an [API key](http://www.wunderground.com/weather/api/d/login.html). With that in hand, try ...
+Note that the Weather Underground API requires an [API key](http://www.wunderground.com/weather/api/d/login.html). With `KEY` in hand, try ...
 
     curl http://api.wunderground.com/api/KEY/conditions/q/chicago.json
 
@@ -14,7 +14,27 @@ You can [test](http://api.openweathermap.org/data/2.5/weather?q=Chicago) the [Op
 
     curl http://api.openweathermap.org/data/2.5/weather?q=Chicago
 
----
 
-Install the weather package with `go get -u github.com/joyrexus/weather/...`.
-This will also install the [`wx`](cmd/wx/README.md) and [`wxserve`](cmd/wxserve/README.md) commands.
+## Setup
+
+Install the weather package with `go get -u github.com/joyrexus/weather/...`.  This will also install the [`wx`](cmd/wx/README.md) and [`wxserve`](cmd/wxserve/README.md) commands.
+
+Then, be sure to set the `WUNDERGROUND_API_KEY` environment variable to reflect your Weather Underground API key:
+
+    export WUNDERGROUND_API_KEY=your_api_key
+
+If `$GOPATH/bin` is in your `PATH` ...
+
+    $ wx chicago
+    35.5
+
+    $ wx nashville
+    65.1
+
+... or run `wxserve` to start the demo web service and check the following urls in your browser:
+
+    http://localhost:8080/weather/chicago
+
+    http://localhost:8080/weather/nashville
+
+
