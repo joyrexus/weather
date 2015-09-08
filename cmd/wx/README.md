@@ -1,9 +1,8 @@
 # wx
 
-A simple CLI that provides a JSON-encoded response with live weather
-data for a particular city.
+A simple CLI that provides the temperature (in Fahrenheit) for a particular city.
 
-For example, to get weather data for the city of Nashville, try ...
+For example, to get the temperature of Nashville, try ...
 
     go run main.go nashville
 

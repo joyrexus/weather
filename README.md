@@ -18,6 +18,3 @@ You can [test](http://api.openweathermap.org/data/2.5/weather?q=Chicago) the [Op
 
 Install the weather package with `go get -u github.com/joyrexus/weather/...`.
 This will also install the [`wx`](cmd/wx/README.md) and [`wxserve`](cmd/wxserve/README.md) commands.
-
-
-

@@ -13,9 +13,9 @@ func main() {
 		log.Fatal("Please specify a city name!")
 	}
 	city := os.Args[1]
-	data, err := weather.Query(city)
+	temp, err := weather.Temperature(city)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Println(data)
+	fmt.Println(temp)
 }

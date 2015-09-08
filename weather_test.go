@@ -2,51 +2,41 @@ package weather
 
 import "testing"
 
-func TestWeatherData(t *testing.T) {
-	type bounds struct {
-		min float64
-		max float64
+func TestOpenWeatherMap(t *testing.T) {
+	w := openWeatherMapMock{}
+	want := 75.65
+	got, err := w.temperature("chicago")
+	if err != nil {
+		t.Error(err)
 	}
-	type expected struct {
-		city string
-		bounds
+	if got != want {
+		t.Errorf("temp(%q) == %v, want %v", "chicago", got, want)
 	}
+}
 
-	cases := []struct {
-		in string
-		want expected
-	}{
-		{
-			"chicago", 
-			expected{"Chicago", bounds{-50.00, 150.00}},
-		},
-		{
-			"nashville", 
-			expected{"Nashville", bounds{-50.00, 150.00}},
-		},
+func TestWunderground(t *testing.T) {
+	w := wundergroundMock{}
+	want := 78.8
+	got, err := w.temperature("chicago")
+	if err != nil {
+		t.Error(err)
 	}
+	if got != want {
+		t.Errorf("temp(%q) == %v, want %v", "chicago", got, want)
+	}
+}
 
-	for _, c := range cases {
-		got, err := Query(c.in)
-		if err != nil {
-			t.Error(err)
-		}
-		if got.City != c.want.city {
-			t.Errorf("query(%q) == %q, want %q", c.in, got.City, c.want.city)
-		}
-		if got.Main.Temp > c.want.bounds.max {
-			t.Errorf(
-				"%v fahrenheit %q is unusually hot!", 
-				got.City, 
-				got.Main.Temp,
-			)
-		}
-		if got.Main.Temp < c.want.bounds.min {
-			t.Errorf(
-				"%v fahrenheit for %q is unusually cold!", 
-				got.City, 
-				got.Main.Temp,
-			)
-		}
+func TestWeatherServices(t *testing.T) {
+	w := weatherServices{
+		new(openWeatherMapMock),
+		new(wundergroundMock),
+	}
+	want := 77.225
+	got, err := w.temperature("chicago")
+	if err != nil {
+		t.Error(err)
+	}
+	if got != want {
+		t.Errorf("temp(%q) == %v, want %v", "chicago", got, want)
 	}
 }
