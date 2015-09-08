@@ -12,9 +12,7 @@ import (
 /* WEATHER UNDEGROUND SERVICE */
 
 // wundergroundMock is a mock of the wunderground type
-type wundergroundMock struct{               
-	apiKey string
-}
+type wundergroundMock struct{}
 
 // temperature returns the temperature of `city` in fahrenheit.
 func (w *wundergroundMock) temperature(city string) (float64, error) {

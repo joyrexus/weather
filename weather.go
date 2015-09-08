@@ -8,8 +8,8 @@ import (
 // Temperature returns the temperature of `city` in fahrenheit.
 func Temperature(city string) (float64, error) {
 	w := weatherServices{
-		new(openWeatherMapMock),
-		new(wundergroundMock),
+		new(wunderground),
+		new(openWeatherMap),
 	}
 	t, err := w.temperature(city)
 	if err != nil {
@@ -30,7 +30,7 @@ func (ws weatherServices) temperature(city string) (float64, error) {
 	for _, service := range ws {
 		t, err := service.temperature(city)
 		if err != nil {
-			return 0, nil
+			return 0, err
 		}
 		sum += t
 	}
@@ -45,13 +45,15 @@ func (ws weatherServices) temperature(city string) (float64, error) {
 /* WEATHER UNDEGROUND SERVICE */
 
 // wunderground is a weatherService that utilizes the WeatherUnderground API.
-type wunderground struct{               
-	apiKey string
-}
+type wunderground struct{}               
 
 // temperature returns the temperature of `city` in fahrenheit.
 func (w *wunderground) temperature(city string) (float64, error) {
-	baseURL := "http://api.wunderground.com/api/" + w.apiKey + "/conditions/q/" 
+	err := checkKey() // ensure that API_KEY is set!
+	if err != nil {
+		return 0, err
+	}
+	baseURL := "http://api.wunderground.com/api/" + API_KEY + "/conditions/q/" 
 	resp, err := http.Get(baseURL + city + ".json")
 	if err != nil {
 		return 0, err
