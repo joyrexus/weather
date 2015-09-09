@@ -2,6 +2,8 @@
 
 What's this? Just working through Peter Bourgon's Go tutorial, [How I Start](https://howistart.org/posts/go/1), wherein he walks you through setting up a concurrent, [REST-style](https://github.com/rcc-uchicago/api-standards#rcc-web-service-standards) backend server for aggregating weather data from various weather service APIs using only the Go standard library. It's a nice intro to [Go-based web services](http://bl.ocks.org/joyrexus/e2daebf6759d6b930fe7).
 
+![cloud-pic](cloud.gif)
+
 See [`json-samples`](json-samples) for samples of the JSON-encoded data
 returned by the [OpenWeatherMap](http://openweathermap.org/api) and 
 [Weather Underground](http://www.wunderground.com/weather/api) APIs.
