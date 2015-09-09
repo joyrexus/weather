@@ -40,3 +40,6 @@ If `$GOPATH/bin` is in your `PATH` ...
     http://localhost:8080/weather/nashville
 
 
+## To Do
+
+Query the services [concurrently](https://howistart.org/posts/go/1#make-it-concurrent).
